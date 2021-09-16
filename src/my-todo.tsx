@@ -23,9 +23,9 @@ export default function MyToDo() {
 
   return (
     <Auth0Provider
-      domain="dev-bcufvmxd.us.auth0.com"
-      clientId="uULH6wnDFn84BrTI1M7Pitr1VcBAbtwv"
-      audience="https://take-my-todo/auth"
+      domain="YOUR_AUTHZ_DOMAIN"
+      clientId="YOUR_AUTHZ_APP_ID"
+      audience="YOUR_AUTHZ_IDENTIFIER_URL"
       redirectUri={window.location.origin}
     >
       <AuthProvider>
