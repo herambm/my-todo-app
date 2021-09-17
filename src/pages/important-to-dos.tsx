@@ -9,7 +9,7 @@ import { IToDo } from "../models/to-do.interface";
 const useStyles = makeStyles({
   title: {
     fontWeight: "bold",
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
   },
 });
 

@@ -16,8 +16,8 @@ const useStyle = makeStyles({
     paddingBottom: "0.75rem",
   },
   content: {
-    width: "39rem",
-    paddingRight: "2.5",
+    width: "100%",
+    paddingRight: "2.5rem",
     paddingLeft: "0.5rem",
   },
 });

@@ -8,7 +8,7 @@ import { GET_TODOS } from "../data/graphql/get-to-dos";
 const useStyles = makeStyles({
   title: {
     fontWeight: "bold",
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
     paddingLeft: "1rem",
   },
 });

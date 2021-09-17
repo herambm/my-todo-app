@@ -7,14 +7,31 @@ import { PageMenu } from "./components/page-menu";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AuthProvider } from "./providers/auth-provider";
 import ApolloGraphqlProvider from "./providers/apollo-gql-provider";
-import { Container, makeStyles } from "@material-ui/core";
+import { Box, Container, makeStyles } from "@material-ui/core";
+import { ListAlt } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   layout: {
     display: "flex",
+    margin: "unset",
   },
   pageContent: {
-    paddingTop: "2rem",
+    paddingTop: "1rem",
+  },
+  topBar: {
+    maxWidth: "unset",
+    height: "3rem",
+    padding: "unset",
+    margin: "unset",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "1.5rem",
+    paddingLeft: "1rem",
+    background: "#3f51b5",
+    color: "white",
+  },
+  topBarTitle: {
+    marginLeft: "0.1rem",
   },
 });
 
@@ -30,10 +47,14 @@ export default function MyToDo() {
     >
       <AuthProvider>
         <ApolloGraphqlProvider>
+          <Container className={classes.topBar}>
+            <ListAlt />
+            <Box className={classes.topBarTitle}>My ToDo</Box>
+          </Container>
           <Router>
-            <Container className={classes.layout}>
+            <Container className={classes.layout} disableGutters={true}>
               <PageMenu />
-              <Container className={classes.pageContent}>
+              <Container className={classes.pageContent} disableGutters={true}>
                 <Switch>
                   <Route path="/my-day">
                     <MyDay />

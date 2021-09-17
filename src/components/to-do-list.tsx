@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   },
   completedTitle: {
     marginTop: "0.8rem",
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
     marginBottom: "0.5rem",
     fontWeight: "bold",
   },
