@@ -7,8 +7,12 @@ import { PageMenu } from "./components/page-menu";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { AuthProvider } from "./providers/auth-provider";
 import ApolloGraphqlProvider from "./providers/apollo-gql-provider";
-import { Box, Container, makeStyles } from "@material-ui/core";
-import { ListAlt } from "@material-ui/icons";
+import { Container, makeStyles } from "@material-ui/core";
+import { TopBar } from "./components/top-bar";
+
+const AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
+const AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID;
+const AUTH0_AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 
 const useStyles = makeStyles({
   layout: {
@@ -18,39 +22,23 @@ const useStyles = makeStyles({
   pageContent: {
     paddingTop: "1rem",
   },
-  topBar: {
-    maxWidth: "unset",
-    height: "3rem",
-    padding: "unset",
-    margin: "unset",
-    display: "flex",
-    alignItems: "center",
-    fontSize: "1.5rem",
-    paddingLeft: "1rem",
-    background: "#3f51b5",
-    color: "white",
-  },
-  topBarTitle: {
-    marginLeft: "0.1rem",
-  },
 });
 
-export default function MyToDo() {
+export default function App() {
   const classes = useStyles();
 
   return (
     <Auth0Provider
-      domain="dev-bcufvmxd.us.auth0.com"
-      clientId="uULH6wnDFn84BrTI1M7Pitr1VcBAbtwv"
-      audience="https://take-my-todo/auth"
+      domain={AUTH0_DOMAIN ?? ""}
+      clientId={AUTH0_CLIENT_ID ?? ""}
+      audience={AUTH0_AUDIENCE ?? ""}
       redirectUri={window.location.origin}
+      useRefreshTokens={true}
+      cacheLocation="localstorage"
     >
       <AuthProvider>
         <ApolloGraphqlProvider>
-          <Container className={classes.topBar}>
-            <ListAlt />
-            <Box className={classes.topBarTitle}>My ToDo</Box>
-          </Container>
+          <TopBar />
           <Router>
             <Container className={classes.layout} disableGutters={true}>
               <PageMenu />
