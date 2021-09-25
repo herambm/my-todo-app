@@ -4,7 +4,13 @@ import { ToDoCreate } from "../components/to-do-create";
 import { isToday } from "date-fns";
 import { IToDo } from "../models/to-do.interface";
 import { ToDoList } from "../components/to-do-list";
-import { Box, Container, Divider, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Divider,
+  makeStyles,
+} from "@material-ui/core";
 import { GET_TODOS } from "../data/graphql/get-to-dos";
 
 const useStyles = makeStyles({
@@ -26,7 +32,7 @@ export const MyDay: React.FunctionComponent = () => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
   if (error) {
     return <div>Something went wrong...</div>;

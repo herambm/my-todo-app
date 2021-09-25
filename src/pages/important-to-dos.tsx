@@ -1,5 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { Box, Container, Divider, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Divider,
+  makeStyles,
+} from "@material-ui/core";
 import * as React from "react";
 import { ToDoCreate } from "../components/to-do-create";
 import { ToDoList } from "../components/to-do-list";
@@ -22,7 +28,7 @@ export const ImportantToDos = () => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <CircularProgress />;
   }
   if (error) {
     return <div>Something went wrong...</div>;
