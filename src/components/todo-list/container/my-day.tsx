@@ -1,17 +1,11 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
-import { ToDoCreate } from "../components/to-do-create";
 import { isToday } from "date-fns";
-import { IToDo } from "../models/to-do.interface";
-import { ToDoList } from "../components/to-do-list";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Divider,
-  makeStyles,
-} from "@material-ui/core";
-import { GET_TODOS } from "../data/graphql/get-to-dos";
+import { IToDo } from "../../../models/to-do.interface";
+import { ToDoListRenderer } from "../renderer/todo-list-renderer";
+import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
+import { GET_TODOS } from "../../../data/graphql/get-to-dos";
+import { ToDoCreator } from "../../todo-create/container/todo-creator";
 
 const useStyles = makeStyles({
   title: {
@@ -38,11 +32,11 @@ export const MyDay: React.FunctionComponent = () => {
     return <div>Something went wrong...</div>;
   }
   return (
-    <Container>
+    <Box>
       <Box className={classes.title}>My day</Box>
-      <ToDoCreate />
+      <ToDoCreator />
       <Divider />
-      <ToDoList todos={myDay} />
-    </Container>
+      <ToDoListRenderer todos={myDay} />
+    </Box>
   );
 };

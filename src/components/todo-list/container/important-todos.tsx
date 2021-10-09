@@ -1,16 +1,10 @@
 import { useQuery } from "@apollo/client";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Divider,
-  makeStyles,
-} from "@material-ui/core";
+import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
 import * as React from "react";
-import { ToDoCreate } from "../components/to-do-create";
-import { ToDoList } from "../components/to-do-list";
-import { GET_TODOS } from "../data/graphql/get-to-dos";
-import { IToDo } from "../models/to-do.interface";
+import { ToDoListRenderer } from "../renderer/todo-list-renderer";
+import { GET_TODOS } from "../../../data/graphql/get-to-dos";
+import { IToDo } from "../../../models/to-do.interface";
+import { ToDoCreator } from "../../todo-create";
 
 const useStyles = makeStyles({
   title: {
@@ -19,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const ImportantToDos = () => {
+export const ImportantToDos: React.FunctionComponent = () => {
   const classes = useStyles();
   const { data, loading, error } = useQuery(GET_TODOS);
   const importantTodos = React.useMemo<IToDo[]>(
@@ -34,11 +28,11 @@ export const ImportantToDos = () => {
     return <div>Something went wrong...</div>;
   }
   return (
-    <Container>
+    <Box>
       <Box className={classes.title}>Important</Box>
-      <ToDoCreate />
+      <ToDoCreator />
       <Divider />
-      <ToDoList todos={importantTodos} />
-    </Container>
+      <ToDoListRenderer todos={importantTodos} />
+    </Box>
   );
 };

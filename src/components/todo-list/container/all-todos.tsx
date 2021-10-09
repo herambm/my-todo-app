@@ -1,15 +1,9 @@
 import * as React from "react";
 import { useQuery } from "@apollo/client";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Divider,
-  makeStyles,
-} from "@material-ui/core";
-import { ToDoCreate } from "../components/to-do-create";
-import { ToDoList } from "../components/to-do-list";
-import { GET_TODOS } from "../data/graphql/get-to-dos";
+import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
+import { ToDoListRenderer } from "../renderer/todo-list-renderer";
+import { GET_TODOS } from "../../../data/graphql/get-to-dos";
+import { ToDoCreator } from "../../todo-create";
 
 const useStyles = makeStyles({
   title: {
@@ -19,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const AllToDos = () => {
+export const AllToDos: React.FunctionComponent = () => {
   const classes = useStyles();
   const { data, loading, error } = useQuery(GET_TODOS);
 
@@ -30,11 +24,11 @@ export const AllToDos = () => {
     return <div>Something went wrong...</div>;
   }
   return (
-    <Container>
+    <Box>
       <Box className={classes.title}>All</Box>
-      <ToDoCreate />
+      <ToDoCreator />
       <Divider />
-      {<ToDoList todos={data?.todos ?? []} />}
-    </Container>
+      {<ToDoListRenderer todos={data?.todos ?? []} />}
+    </Box>
   );
 };

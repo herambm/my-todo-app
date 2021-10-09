@@ -10,16 +10,14 @@ import { DoneAll, Flare, LabelImportant } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
-  pageMenu: {
-    width: "25%",
-  },
+  pageMenu: {},
   pageMenuItem: {
     minHeight: "3.6rem",
     height: "3.6rem",
   },
 });
 
-export const PageMenu = () => {
+export const PageMenu: React.FunctionComponent = () => {
   const classes = useStyles();
   const linkStyle = React.useRef({
     style: {

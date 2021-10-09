@@ -1,7 +1,8 @@
-import { Box, Container, Divider, makeStyles } from "@material-ui/core";
+import { Box, Divider, makeStyles } from "@material-ui/core";
 import * as React from "react";
-import { IToDo } from "../models/to-do.interface";
-import { ToDo } from "./to-do";
+import { IToDo } from "../../../models/to-do.interface";
+import { ToDo } from "../../to-do";
+import classNames from "classnames/bind";
 
 const useStyles = makeStyles({
   list: {
@@ -18,11 +19,12 @@ const useStyles = makeStyles({
 
 export interface IToDoListProps {
   todos: IToDo[];
+  className?: string;
 }
 
-export const ToDoList: React.FunctionComponent<
+export const ToDoListRenderer: React.FunctionComponent<
   React.PropsWithChildren<IToDoListProps>
-> = ({ todos }) => {
+> = ({ todos, className }) => {
   const classes = useStyles();
 
   const completedToDos = React.useMemo(
@@ -35,7 +37,7 @@ export const ToDoList: React.FunctionComponent<
   );
 
   return (
-    <Container className={classes.list}>
+    <Box className={classNames(classes.list, className)}>
       {activeToDos.length > 0 && (
         <Box>
           {activeToDos.map((todo) => (
@@ -52,6 +54,6 @@ export const ToDoList: React.FunctionComponent<
           ))}
         </Box>
       )}
-    </Container>
+    </Box>
   );
 };
