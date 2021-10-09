@@ -1,39 +1,24 @@
-import { Box, Container, makeStyles } from "@material-ui/core";
-import { ListAlt } from "@material-ui/icons";
+import { Input, makeStyles } from "@material-ui/core";
 import * as React from "react";
+import { TopBarRenderer } from "../renderer/top-bar-renderer";
 import { LogoutButton } from "./log-out-button";
+import { UserAvatar } from "./user-avatar";
 
 const useStyles = makeStyles({
-  topBar: {
-    maxWidth: "unset",
-    height: "3rem",
-    padding: "unset",
-    margin: "unset",
-    display: "flex",
-    alignItems: "center",
-    fontSize: "1.5rem",
-    paddingLeft: "1rem",
-    background: "#3f51b5",
-    color: "white",
-  },
-  topBarTitle: {
-    marginLeft: "0.5rem",
-  },
-  logOut: {
-    marginLeft: "auto",
-    color: "#ffffff",
-    marginRight: "1rem",
+  input: {
+    width: "100%",
+    position: "absolute",
+    marginLeft: "1.5rem",
   },
 });
 
 export const TopBar: React.FunctionComponent = () => {
   const classes = useStyles();
 
-  return (
-    <Container className={classes.topBar}>
-      <ListAlt />
-      <Box className={classes.topBarTitle}>My ToDo</Box>
-      <LogoutButton className={classes.logOut} />
-    </Container>
-  );
+  const rightItems = [<LogoutButton />, <UserAvatar />];
+  const leftItems = [
+    <Input placeholder="Search your task" className={classes.input} />,
+  ];
+
+  return <TopBarRenderer rightItems={rightItems} leftItems={leftItems} />;
 };

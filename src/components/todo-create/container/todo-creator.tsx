@@ -18,8 +18,8 @@ export const ToDoCreator = () => {
       await insertToDos({
         variables: {
           title: createInput.inputValue,
-          is_important: createInput.is_important,
-          is_completed: createInput.is_completed,
+          is_important: createInput.isImportant,
+          is_completed: createInput.isCompleted,
           due_by: createInput.dueBy,
         },
       });

@@ -24,8 +24,8 @@ const useStyles = makeStyles({
 
 export interface ICreateInput {
   inputValue: string;
-  is_important: boolean;
-  is_completed: boolean;
+  isImportant: boolean;
+  isCompleted: boolean;
   dueBy: string | null;
 }
 
@@ -64,8 +64,8 @@ export const ToDoCreateRenderer: React.FunctionComponent<ITodoCreate> = ({
   const onAddClick = React.useCallback(() => {
     onCreateAction({
       inputValue,
-      is_completed: false,
-      is_important: false,
+      isCompleted: false,
+      isImportant: false,
       dueBy: null,
     }).then(() => setInputValue(""));
   }, [onCreateAction, inputValue]);
