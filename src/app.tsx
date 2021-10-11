@@ -9,7 +9,7 @@ import {
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./providers/auth-provider";
 import ApolloGraphqlProvider from "./providers/apollo-gql-provider";
-import { LeftRail } from "./components/todo-menu";
+import { TodoMenu } from "./components/todo-menu";
 import { AllToDos, ImportantToDos, MyDay } from "./components/todo-list";
 
 const AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -53,7 +53,7 @@ export default function App() {
           <Router>
             <ThemeProvider theme={theme}>
               <Container className={classes.layout} disableGutters={true}>
-                <LeftRail />
+                <TodoMenu />
                 <Container
                   className={classes.pageContent}
                   disableGutters={true}

@@ -2,9 +2,9 @@ import { useMutation } from "@apollo/client";
 import { Box, Container, makeStyles, Checkbox } from "@material-ui/core";
 import { Star, StarBorder } from "@material-ui/icons";
 import * as React from "react";
-import { GET_TODOS } from "../data/graphql/get-to-dos";
-import { UPDATE_TO_DO } from "../data/graphql/update-to-do";
-import { IToDo } from "../models/to-do.interface";
+import { GET_TODOS } from "../../data/graphql/get-to-dos";
+import { UPDATE_TO_DO } from "../../data/graphql/update-to-do";
+import { IToDo } from "../../models/to-do.interface";
 
 const useStyle = makeStyles({
   toDo: {

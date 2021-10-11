@@ -1,7 +1,7 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { IToDo } from "../../../models/to-do.interface";
-import { ToDo } from "../../to-do";
+import { ToDo } from "../../todo/to-do";
 import classNames from "classnames/bind";
 
 const useStyles = makeStyles({

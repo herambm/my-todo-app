@@ -32,9 +32,11 @@ export const MyDay: React.FunctionComponent = () => {
   if (loading) {
     return <CircularProgress />;
   }
+
   if (error) {
     return <div>Something went wrong...</div>;
   }
+
   return (
     <Box>
       <TopBar />
