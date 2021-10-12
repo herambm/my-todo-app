@@ -1,11 +1,6 @@
 import * as React from "react";
 import { Auth0Provider } from "@auth0/auth0-react";
-import {
-  Container,
-  createTheme,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core";
+import { Box, Divider, makeStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./providers/auth-provider";
 import ApolloGraphqlProvider from "./providers/apollo-gql-provider";
@@ -19,20 +14,14 @@ const AUTH0_AUDIENCE = process.env.REACT_APP_AUTH0_AUDIENCE;
 const useStyles = makeStyles({
   layout: {
     display: "flex",
-    margin: "unset",
   },
-  pageContent: {
-    paddingTop: "1.5rem",
+  menu: {
+    flex: 1,
     padding: "1rem",
-    background: "#F3F9FB",
   },
-});
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#226597",
-    },
+  content: {
+    flex: 5,
+    padding: "1rem",
   },
 });
 
@@ -51,27 +40,25 @@ export default function App() {
       <AuthProvider>
         <ApolloGraphqlProvider>
           <Router>
-            <ThemeProvider theme={theme}>
-              <Container className={classes.layout} disableGutters={true}>
+            <Box className={classes.layout}>
+              <Box className={classes.menu}>
                 <TodoMenu />
-                <Container
-                  className={classes.pageContent}
-                  disableGutters={true}
-                >
-                  <Switch>
-                    <Route path="/my-day">
-                      <MyDay />
-                    </Route>
-                    <Route path="/important">
-                      <ImportantToDos />
-                    </Route>
-                    <Route path="/">
-                      <AllToDos />
-                    </Route>
-                  </Switch>
-                </Container>
-              </Container>
-            </ThemeProvider>
+              </Box>
+              <Divider orientation="vertical" flexItem />
+              <Box className={classes.content}>
+                <Switch>
+                  <Route path="/my-day">
+                    <MyDay />
+                  </Route>
+                  <Route path="/important">
+                    <ImportantToDos />
+                  </Route>
+                  <Route path="/">
+                    <AllToDos />
+                  </Route>
+                </Switch>
+              </Box>
+            </Box>
           </Router>
         </ApolloGraphqlProvider>
       </AuthProvider>

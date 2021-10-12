@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     position: "absolute",
     marginLeft: "1.5rem",
   },
+  topBar: {
+    marginTop: "0.5rem",
+  },
 });
 
 export const TopBar: React.FunctionComponent = () => {
@@ -20,5 +23,11 @@ export const TopBar: React.FunctionComponent = () => {
     <Input placeholder="Search your task" className={classes.input} />,
   ];
 
-  return <TopBarRenderer rightItems={rightItems} leftItems={leftItems} />;
+  return (
+    <TopBarRenderer
+      rightItems={rightItems}
+      leftItems={leftItems}
+      className={classes.topBar}
+    />
+  );
 };

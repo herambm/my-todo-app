@@ -1,19 +1,16 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { IToDo } from "../../../models/to-do.interface";
-import { ToDo } from "../../todo/to-do";
+import { ToDo } from "../../todo/container/to-do";
 import classNames from "classnames/bind";
 
 const useStyles = makeStyles({
   list: {
-    padding: "1.1rem",
+    padding: "0.5rem",
     paddingTop: "0.5rem !important",
   },
-  completedTitle: {
-    marginTop: "0.8rem",
-    fontSize: "1.4rem",
-    marginBottom: "0.5rem",
-    fontWeight: "bold",
+  completedHeader: {
+    marginBottom: "0.2rem",
   },
 });
 
@@ -48,7 +45,7 @@ export const ToDoListRenderer: React.FunctionComponent<
       {completedToDos.length > 0 && (
         <Box>
           {activeToDos.length > 0 && <Divider />}
-          <Box className={classes.completedTitle}>Completed</Box>
+          <h2 className={classes.completedHeader}>Completed</h2>
           {completedToDos.map((todo) => (
             <ToDo todo={todo} key={todo.id} />
           ))}

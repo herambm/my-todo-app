@@ -10,19 +10,21 @@ import { NavLink } from "react-router-dom";
 import classNames from "classnames";
 
 const useStyles = makeStyles({
-  todoMenu: {},
-  todoMenuItem: {
-    minHeight: "3.6rem",
-    height: "3.6rem",
-  },
   todoMenuLayout: {
-    width: "25%",
-    padding: "1rem 1rem 1rem 1rem",
+    margin: "unset",
+    height: "100%",
   },
   todoMenuHeader: {
-    marginTop: "0.5rem",
-    marginBottom: "0.5rem",
-    marginLeft: "0.5rem",
+    padding: "0.5rem",
+    margin: "unset",
+  },
+  todoMenuItem: {
+    height: "3rem",
+    padding: "0.5rem",
+  },
+  todoIcon: {
+    marginRight: "1.5rem",
+    minWidth: "unset",
   },
 });
 
@@ -52,11 +54,11 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
       textDecoration: "inherit",
     },
   });
-  /** Todo - Fix accessibility */
+
   return (
     <Box className={classNames(classes.todoMenuLayout, className)}>
       <h1 className={classes.todoMenuHeader}>{header}</h1>
-      <MenuList className={classes.todoMenu} disablePadding={true}>
+      <MenuList>
         {menuProps.map((item) => (
           <NavLink to={item.linkTo} style={linkStyle.current.style}>
             <MenuItem
@@ -64,7 +66,11 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
               key={item.id}
               className={classNames(classes.todoMenuItem, item.className)}
             >
-              {item.icon && <ListItemIcon>{item.icon}</ListItemIcon>}
+              {item.icon && (
+                <ListItemIcon className={classes.todoIcon}>
+                  {item.icon}
+                </ListItemIcon>
+              )}
               <Box>{item.text}</Box>
             </MenuItem>
           </NavLink>

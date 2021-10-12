@@ -33,7 +33,7 @@ export const TopBarRenderer: React.FunctionComponent<ITopBarRenderer> = ({
   className,
 }) => {
   const classes = useStyles();
-
+  // Todo: Fix key issue, accept an array of objects
   return (
     <Box className={classNames(classes.topBar, className)}>
       {leftItems && <Box className={classes.leftItems}>{leftItems}</Box>}
