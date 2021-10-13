@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
-import { LoginPage } from "../pages/login";
+import { LoginPage } from "../layouts/login";
 
 export const AuthProvider: React.FunctionComponent<
   React.PropsWithChildren<{}>

@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const LoginPage = () => {
+export const LoginPage: React.FunctionComponent = () => {
   const classes = useStyles();
 
   return (
