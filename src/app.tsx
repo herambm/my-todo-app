@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./providers/auth-provider";
 import ApolloGraphqlProvider from "./providers/apollo-gql-provider";
 import { TodoApp } from "./layouts/todo-app";
+import { TodoIDbStoreProvider } from "./providers/todo-idb-store";
 
 const AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 const AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -21,9 +22,11 @@ export default function App() {
     >
       <AuthProvider>
         <ApolloGraphqlProvider>
-          <Router>
-            <TodoApp />
-          </Router>
+          <TodoIDbStoreProvider>
+            <Router>
+              <TodoApp />
+            </Router>
+          </TodoIDbStoreProvider>
         </ApolloGraphqlProvider>
       </AuthProvider>
     </Auth0Provider>

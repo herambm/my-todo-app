@@ -7,6 +7,7 @@ import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
 import { ToDoCreator } from "../../todo-create/container/todo-creator";
 import { TopBar } from "../../top-bar/container/top-bar";
+import { useTodoIDbStore } from "../../../providers/todo-idb-store";
 
 const useStyles = makeStyles({
   title: {
@@ -28,6 +29,13 @@ export const MyDay: React.FunctionComponent = () => {
       ) ?? [],
     [data]
   );
+  const todoIDbStore = useTodoIDbStore();
+
+  React.useEffect(() => {
+    todoIDbStore
+      .addTodos(data.todos)
+      .then(() => console.log("Todos added in indexDB"));
+  }, [todoIDbStore, data.todos]);
 
   if (loading) {
     return <CircularProgress />;
