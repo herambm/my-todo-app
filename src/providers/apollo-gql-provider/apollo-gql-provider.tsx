@@ -11,9 +11,9 @@ import fetch from "isomorphic-fetch";
 
 const API_URL = "https://take-my-todo.hasura.app/v1/graphql";
 
-export default function ApolloGraphqlProvider({
+export const ApolloGraphqlProvider = ({
   children,
-}: React.PropsWithChildren<{}>) {
+}: React.PropsWithChildren<{}>) => {
   const { getAccessTokenSilently, user } = useAuth0();
 
   const authLink = setContext(async (_, { headers }) => {
@@ -48,4 +48,4 @@ export default function ApolloGraphqlProvider({
   });
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
-}
+};

@@ -1,23 +1,26 @@
 import * as React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button } from "@material-ui/core";
+import { ExitToApp } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core";
 
-export interface ILogoutButtonProps {
-  className?: string;
-}
+const useStyles = makeStyles({
+  logOut: {
+    marginRight: "0.3rem",
+    marginLeft: "0.3rem",
+    marginTop: "0.8rem",
+    "&:hover": {
+      cursor: "pointer",
+    },
+  },
+});
 
-export const LogoutButton: React.FunctionComponent<ILogoutButtonProps> = ({
-  className,
-}) => {
+export const LogoutButton: React.FunctionComponent = () => {
   const { logout } = useAuth0();
+  const classes = useStyles();
   const onLogOut = React.useCallback(
     () => logout({ returnTo: window.location.origin }),
     [logout]
   );
 
-  return (
-    <Button onClick={onLogOut} className={className}>
-      Log out
-    </Button>
-  );
+  return <ExitToApp onClick={onLogOut} className={classes.logOut} />;
 };

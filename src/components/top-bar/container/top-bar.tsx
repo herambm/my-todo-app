@@ -2,7 +2,7 @@ import { Input, makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { TopBarRenderer } from "../renderer/top-bar-renderer";
 import { LogoutButton } from "./log-out-button";
-import { UserProfile } from "./user-profile";
+import { ThemeSelector } from "./theme-selector";
 
 const useStyles = makeStyles({
   input: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 export const TopBar: React.FunctionComponent = () => {
   const classes = useStyles();
 
-  const rightItems = [<LogoutButton />, <UserProfile />];
+  const rightItems = [<ThemeSelector />, <LogoutButton />];
   const leftItems = [
     <Input placeholder="Search your task" className={classes.input} />,
   ];
