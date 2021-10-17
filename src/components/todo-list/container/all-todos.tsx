@@ -1,10 +1,10 @@
 import * as React from "react";
-import { useQuery } from "@apollo/client";
-import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
+import { Box, Divider, makeStyles } from "@material-ui/core";
 import { ToDoListRenderer } from "../renderer/todo-list-renderer";
-import { GET_TODOS } from "../../../data/graphql/get-to-dos";
 import { ToDoCreator } from "../../todo-create";
 import { TopBar } from "../../top-bar/container/top-bar";
+import { TodoListWrapper } from "./todo-list-wrapper";
+import { IToDoResponse } from "../../../models/to-do.interface";
 
 const useStyles = makeStyles({
   title: {
@@ -19,25 +19,21 @@ const useStyles = makeStyles({
 
 export const AllToDos: React.FunctionComponent = () => {
   const classes = useStyles();
-  const { data, loading, error } = useQuery(GET_TODOS);
 
-  if (loading) {
-    return <CircularProgress />;
-  }
-
-  if (error) {
-    return <div>Something went wrong...</div>;
-  }
-
-  return (
-    <Box>
-      <TopBar />
-      <Box role="main" className={classes.body}>
-        <Box className={classes.title}>All</Box>
-        <ToDoCreator />
-        <Divider />
-        {<ToDoListRenderer todos={data?.todos ?? []} />}
+  const componentWithTodos = React.useCallback(
+    (todos: IToDoResponse[]) => (
+      <Box>
+        <TopBar />
+        <Box role="main" className={classes.body}>
+          <Box className={classes.title}>All</Box>
+          <ToDoCreator />
+          <Divider />
+          {<ToDoListRenderer todos={todos ?? []} />}
+        </Box>
       </Box>
-    </Box>
+    ),
+    [classes]
   );
+
+  return <TodoListWrapper componentWithTodos={componentWithTodos} />;
 };

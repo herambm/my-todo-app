@@ -1,3 +1,4 @@
+// TODO: Use Gql code generator
 export interface IToDo {
   readonly id: number;
   readonly created_at: string;
@@ -7,4 +8,8 @@ export interface IToDo {
   readonly last_modified_at: string;
   title: string;
   readonly user_id: string;
+}
+
+export interface IToDoResponse extends IToDo {
+  __typename: "string";
 }

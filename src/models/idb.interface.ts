@@ -1,9 +1,5 @@
 import { DBSchema } from "idb";
-import { IToDo } from "./to-do.interface";
-
-export interface IToDoResponse extends IToDo {
-  __typename: "string";
-}
+import { IToDoResponse } from "./to-do.interface";
 
 export interface IIDb extends DBSchema {
   todos: {
