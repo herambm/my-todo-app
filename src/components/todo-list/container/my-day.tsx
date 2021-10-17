@@ -1,13 +1,11 @@
 import * as React from "react";
-import { useQuery } from "@apollo/client";
 import { isToday } from "date-fns";
-import { IToDo } from "../../../models/to-do.interface";
+import { IToDoResponse } from "../../../models/to-do.interface";
 import { ToDoListRenderer } from "../renderer/todo-list-renderer";
-import { Box, CircularProgress, Divider, makeStyles } from "@material-ui/core";
-import { GET_TODOS } from "../../../data/graphql/get-to-dos";
+import { Box, Divider, makeStyles } from "@material-ui/core";
 import { ToDoCreator } from "../../todo-create/container/todo-creator";
 import { TopBar } from "../../top-bar/container/top-bar";
-import { useTodoIDbStore } from "../../../providers/todo-idb-store";
+import { TodoListWrapper } from "./todo-list-wrapper";
 
 const useStyles = makeStyles({
   title: {
@@ -21,39 +19,29 @@ const useStyles = makeStyles({
 
 export const MyDay: React.FunctionComponent = () => {
   const classes = useStyles();
-  const { data, loading, error } = useQuery(GET_TODOS);
-  const myDay = React.useMemo<IToDo[]>(
-    () =>
-      data?.todos?.filter((todo: IToDo) =>
-        isToday(new Date(todo.created_at))
-      ) ?? [],
-    [data]
+
+  const filter = React.useCallback(
+    (todos: IToDoResponse[]) =>
+      todos.filter((todo: any) => isToday(new Date(todo.created_at))) ?? [],
+    []
   );
-  const todoIDbStore = useTodoIDbStore();
 
-  React.useEffect(() => {
-    todoIDbStore
-      .addTodos(data.todos)
-      .then(() => console.log("Todos added in indexDB"));
-  }, [todoIDbStore, data.todos]);
-
-  if (loading) {
-    return <CircularProgress />;
-  }
-
-  if (error) {
-    return <div>Something went wrong...</div>;
-  }
+  const componentWithTodos = React.useCallback(
+    (todos: IToDoResponse[]) => (
+      <Box>
+        <TopBar />
+        <Box role="main" className={classes.body}>
+          <Box className={classes.title}>My day</Box>
+          <ToDoCreator />
+          <Divider />
+          <ToDoListRenderer todos={todos} />
+        </Box>
+      </Box>
+    ),
+    [classes]
+  );
 
   return (
-    <Box>
-      <TopBar />
-      <Box role="main" className={classes.body}>
-        <Box className={classes.title}>My day</Box>
-        <ToDoCreator />
-        <Divider />
-        <ToDoListRenderer todos={myDay} />
-      </Box>
-    </Box>
+    <TodoListWrapper filter={filter} componentWithTodos={componentWithTodos} />
   );
 };

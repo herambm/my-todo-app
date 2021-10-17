@@ -15,30 +15,35 @@ export const ToDo: React.FunctionComponent<
   const [updateToDo] = useMutation(UPDATE_TO_DO);
 
   const onCompleted = React.useCallback(async () => {
-    await updateToDo({
-      variables: {
-        id: todo.id,
-        title: todo.title,
-        is_important: todo.is_important,
-        is_completed: !todo.is_completed,
-        due_by: todo.due_by,
-      },
-      optimisticResponse: true,
-      update: (cache) => {
-        const existingTodos = cache.readQuery({ query: GET_TODOS }) as any;
-        const newTodos = existingTodos.todos.map((t: any) => {
-          if (t.id === todo.id) {
-            return { ...t, is_completed: !todo.is_completed };
-          } else {
-            return t;
-          }
-        });
-        cache.writeQuery({
-          query: GET_TODOS,
-          data: { todos: newTodos },
-        });
-      },
-    });
+    try {
+      // Update idb
+      await updateToDo({
+        variables: {
+          id: todo.id,
+          title: todo.title,
+          is_important: todo.is_important,
+          is_completed: !todo.is_completed,
+          due_by: todo.due_by,
+        },
+        optimisticResponse: true,
+        update: (cache) => {
+          const existingTodos = cache.readQuery({ query: GET_TODOS }) as any;
+          const newTodos = existingTodos.todos.map((t: any) => {
+            if (t.id === todo.id) {
+              return { ...t, is_completed: !todo.is_completed };
+            } else {
+              return t;
+            }
+          });
+          cache.writeQuery({
+            query: GET_TODOS,
+            data: { todos: newTodos },
+          });
+        },
+      });
+    } catch {
+      console.log("Completed action on todo failed");
+    }
   }, [
     todo.id,
     todo.title,

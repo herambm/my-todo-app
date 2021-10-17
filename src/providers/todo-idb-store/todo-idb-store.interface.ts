@@ -6,5 +6,5 @@ export interface ITodoIDbStore {
   putTodo(todo: IToDo): Promise<void>;
   putTodos(todo: IToDo[]): Promise<void>;
   getTodo(key: number): Promise<IToDo | undefined>;
-  getTodos(key: number): Promise<IToDo[] | undefined>;
+  getTodos(): Promise<IToDo[] | undefined>;
 }
