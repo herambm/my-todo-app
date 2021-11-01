@@ -1,4 +1,5 @@
 import { Box } from "@material-ui/core";
+import { grey } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 import * as React from "react";
@@ -13,17 +14,26 @@ const useStyles = makeStyles({
   topBar: {
     position: "relative",
     display: "flex",
+    alignItems: "center",
     width: "100%",
+    paddingLeft: "1.5rem",
+    paddingRight: "1.5rem",
+    height: "3.5rem",
+    borderBottom: `0.1rem solid ${grey[300]}`,
   },
   leftItems: {
     display: "flex",
+    alignItems: "center",
     width: "50%",
     position: "absolute",
+    height: "100%",
   },
   rightItems: {
     display: "flex",
+    alignItems: "center",
     marginLeft: "auto",
     marginRight: "0.4rem",
+    height: "100%",
   },
 });
 

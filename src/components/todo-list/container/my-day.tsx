@@ -4,7 +4,6 @@ import { IToDoResponse } from "../../../models/to-do.interface";
 import { ToDoListRenderer } from "../renderer/todo-list-renderer";
 import { Box, Divider, makeStyles } from "@material-ui/core";
 import { ToDoCreator } from "../../todo-create/container/todo-creator";
-import { TopBar } from "../../top-bar/container/top-bar";
 import { TodoListWrapper } from "./todo-list-wrapper";
 
 const useStyles = makeStyles({
@@ -28,14 +27,11 @@ export const MyDay: React.FunctionComponent = () => {
 
   const componentWithTodos = React.useCallback(
     (todos: IToDoResponse[]) => (
-      <Box>
-        <TopBar />
-        <Box role="main" className={classes.body}>
-          <Box className={classes.title}>My day</Box>
-          <ToDoCreator />
-          <Divider />
-          <ToDoListRenderer todos={todos} />
-        </Box>
+      <Box role="main" className={classes.body}>
+        <Box className={classes.title}>My day</Box>
+        <ToDoCreator />
+        <Divider />
+        <ToDoListRenderer todos={todos} />
       </Box>
     ),
     [classes]

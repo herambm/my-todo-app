@@ -14,10 +14,6 @@ const useStyles = makeStyles({
     margin: "unset",
     height: "100%",
   },
-  todoMenuHeader: {
-    padding: "0.5rem",
-    margin: "unset",
-  },
   todoMenuItem: {
     height: "3rem",
     padding: "0.5rem",
@@ -38,13 +34,11 @@ export interface IMenuProps {
 
 export interface ITodoMenuRenderer {
   menuProps: IMenuProps[];
-  header: string;
   className?: string;
 }
 
 export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
   menuProps,
-  header,
   className,
 }) => {
   const classes = useStyles();
@@ -57,10 +51,13 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
 
   return (
     <Box className={classNames(classes.todoMenuLayout, className)}>
-      <h1 className={classes.todoMenuHeader}>{header}</h1>
       <MenuList>
         {menuProps.map((item) => (
-          <NavLink to={item.linkTo} style={linkStyle.current.style}>
+          <NavLink
+            to={item.linkTo}
+            style={linkStyle.current.style}
+            key={item.id}
+          >
             <MenuItem
               button
               key={item.id}

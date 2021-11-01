@@ -1,33 +1,34 @@
-import { Input, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { TopBarRenderer } from "../renderer/top-bar-renderer";
 import { LogoutButton } from "./log-out-button";
 import { ThemeSelector } from "./theme-selector";
 
 const useStyles = makeStyles({
-  input: {
-    width: "100%",
-    position: "absolute",
-    marginLeft: "1.5rem",
-  },
-  topBar: {
-    marginTop: "0.5rem",
+  header: {
+    height: "auto",
+    margin: "unset",
   },
 });
 
 export const TopBar: React.FunctionComponent = () => {
   const classes = useStyles();
 
-  const rightItems = [<ThemeSelector />, <LogoutButton />];
-  const leftItems = [
-    <Input placeholder="Search your task" className={classes.input} />,
-  ];
-
-  return (
-    <TopBarRenderer
-      rightItems={rightItems}
-      leftItems={leftItems}
-      className={classes.topBar}
-    />
+  const leftItems = React.useMemo(
+    () => [
+      <h1 className={classes.header} key="top-bar-header">
+        To do
+      </h1>,
+    ],
+    [classes.header]
   );
+  const rightItems = React.useMemo(
+    () => [
+      <ThemeSelector key="top-bar-theme-selector" />,
+      <LogoutButton key="top-bar-log-out" />,
+    ],
+    []
+  );
+
+  return <TopBarRenderer rightItems={rightItems} leftItems={leftItems} />;
 };

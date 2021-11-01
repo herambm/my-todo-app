@@ -1,8 +1,8 @@
 import * as React from "react";
 
 export enum Theme {
-  Light,
-  Dark,
+  Light = "Light",
+  Dark = "Dark",
 }
 
 export interface IThemeContext {
@@ -17,14 +17,23 @@ export const ThemeSelectorContext = React.createContext<IThemeContext>(
 export const ThemeSelectorProvider: React.FunctionComponent<
   React.PropsWithChildren<{}>
 > = ({ children }) => {
-  // Todo: Fetch from local storage.
-  const [theme, setTheme] = React.useState(Theme.Light);
+  const [currentTheme, setCurrentTheme] = React.useState(() => {
+    const themeFromLocalStorage = localStorage.getItem("theme");
+    if (themeFromLocalStorage) {
+      return Theme[themeFromLocalStorage as keyof typeof Theme];
+    }
+    return Theme.Light;
+  });
+
   const memoizedTheme = React.useMemo(
     () => ({
-      currentTheme: theme,
-      setTheme,
+      currentTheme,
+      setTheme: (theme: Theme) => {
+        localStorage.setItem("theme", Theme[theme]);
+        setCurrentTheme(theme);
+      },
     }),
-    [theme, setTheme]
+    [currentTheme, setCurrentTheme]
   );
 
   return (

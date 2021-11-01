@@ -27,5 +27,5 @@ export const TodoMenu: React.FunctionComponent = () => {
     []
   );
 
-  return <TodoMenuRenderer menuProps={menu} header="To Do" />;
+  return <TodoMenuRenderer menuProps={menu} />;
 };

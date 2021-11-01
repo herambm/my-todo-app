@@ -3,7 +3,6 @@ import { Box, Divider, makeStyles } from "@material-ui/core";
 import { ToDoListRenderer } from "../renderer/todo-list-renderer";
 import { IToDoResponse } from "../../../models/to-do.interface";
 import { ToDoCreator } from "../../todo-create";
-import { TopBar } from "../../top-bar/container/top-bar";
 import { TodoListWrapper } from "./todo-list-wrapper";
 
 const useStyles = makeStyles({
@@ -27,14 +26,11 @@ export const ImportantToDos: React.FunctionComponent = () => {
 
   const componentWithTodos = React.useCallback(
     (todos: IToDoResponse[]) => (
-      <Box>
-        <TopBar />
-        <Box role="main" className={classes.body}>
-          <Box className={classes.title}>Important</Box>
-          <ToDoCreator />
-          <Divider />
-          <ToDoListRenderer todos={todos} />
-        </Box>
+      <Box role="main" className={classes.body}>
+        <Box className={classes.title}>Important</Box>
+        <ToDoCreator />
+        <Divider />
+        <ToDoListRenderer todos={todos} />
       </Box>
     ),
     [classes]

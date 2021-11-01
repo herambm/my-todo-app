@@ -7,7 +7,6 @@ const useStyles = makeStyles({
   logOut: {
     marginRight: "0.3rem",
     marginLeft: "0.3rem",
-    marginTop: "0.8rem",
     "&:hover": {
       cursor: "pointer",
     },
