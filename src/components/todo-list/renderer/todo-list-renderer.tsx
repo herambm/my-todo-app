@@ -38,7 +38,10 @@ export const ToDoListRenderer: React.FunctionComponent<
       {activeToDos.length > 0 && (
         <Box>
           {activeToDos.map((todo) => (
-            <ToDo todo={todo} key={todo.id} />
+            <Box key={todo.id}>
+              <ToDo todo={todo} />
+              <Divider />
+            </Box>
           ))}
         </Box>
       )}
@@ -47,7 +50,10 @@ export const ToDoListRenderer: React.FunctionComponent<
           {activeToDos.length > 0 && <Divider />}
           <h2 className={classes.completedHeader}>Completed</h2>
           {completedToDos.map((todo) => (
-            <ToDo todo={todo} key={todo.id} />
+            <Box key={todo.id}>
+              <ToDo todo={todo} key={todo.id} />
+              <Divider />
+            </Box>
           ))}
         </Box>
       )}

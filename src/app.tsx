@@ -6,6 +6,7 @@ import { ApolloGraphqlProvider } from "./providers/apollo-gql-provider";
 import { TodoApp } from "./layouts/todo-app";
 import { TodoIDbStoreProvider } from "./providers/todo-idb-store";
 import { UiThemeProvider } from "./providers/theme-provider";
+import { ActionProvider } from "./providers/action-provider";
 
 const AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 const AUTH0_CLIENT_ID = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -26,7 +27,9 @@ export default function App() {
           <TodoIDbStoreProvider>
             <Router>
               <UiThemeProvider>
-                <TodoApp />
+                <ActionProvider>
+                  <TodoApp />
+                </ActionProvider>
               </UiThemeProvider>
             </Router>
           </TodoIDbStoreProvider>

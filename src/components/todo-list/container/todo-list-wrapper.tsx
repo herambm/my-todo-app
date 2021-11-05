@@ -3,7 +3,6 @@ import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
 import { IToDoResponse } from "../../../models/to-do.interface";
-import { useTodoIDbStore } from "../../../providers/todo-idb-store";
 
 export interface ITodoListWrapperProps {
   filter?: (todos: IToDoResponse[]) => IToDoResponse[];
@@ -12,38 +11,25 @@ export interface ITodoListWrapperProps {
 
 export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
   ({ filter, componentWithTodos }) => {
+    // TODO: Add IDb support
     const { data, loading, error } = useQuery(GET_TODOS);
-    // Todo: Remove this and pass idb data in apollo cache
-    const [idbTodos, setIdbTodos] = React.useState<undefined | IToDoResponse>(
-      undefined
-    );
-    const todoIdbStore = useTodoIDbStore();
 
     const filteredTodos = React.useMemo(() => {
-      return filter && data?.todos ? filter(data.todos) : data?.todos;
+      const todos = [...(data?.todos ?? [])];
+      todos.sort(
+        (a: IToDoResponse, b: IToDoResponse) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      );
+      return filter ? filter(todos) : todos;
     }, [filter, data?.todos]);
 
-    React.useEffect(() => {
-      if (!loading && !error && data?.todos) {
-        todoIdbStore.putTodos(data.todos);
-      }
-    }, [todoIdbStore, loading, error, data?.todos]);
-
-    React.useEffect(() => {
-      if ((loading || error) && !data?.todos) {
-        todoIdbStore.getTodos().then((todos) => {
-          setIdbTodos(todos as any);
-        });
-      }
-    }, [loading, error, data?.todos, setIdbTodos, todoIdbStore]);
-
-    if (loading && !idbTodos) {
+    if (loading && filteredTodos.length === 0) {
       return <CircularProgress />;
     }
 
-    if (error && !idbTodos) {
+    if (error && !loading && filteredTodos.length === 0) {
       return <div>Something went wrong...</div>;
     }
 
-    return componentWithTodos(filteredTodos ?? idbTodos ?? []);
+    return componentWithTodos(filteredTodos ?? []);
   };

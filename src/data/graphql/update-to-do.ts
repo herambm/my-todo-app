@@ -18,16 +18,7 @@ export const UPDATE_TO_DO = gql`
         due_by: $due_by
       }
     ) {
-      returning {
-        id
-        title
-        user_id
-        is_completed
-        is_important
-        last_modified_at
-        due_by
-        created_at
-      }
+      affected_rows
     }
   }
 `;

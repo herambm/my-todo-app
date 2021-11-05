@@ -10,13 +10,14 @@ import {
 
 export const ToDoCreator = () => {
   const [insertToDos, { loading, error }] = useMutation(INSERT_TO_DOS, {
-    // Todo: Update idb
+    // TODO: Update idb
     refetchQueries: [GET_TODOS, "GetToDos"],
   });
 
   const onCreateAction = React.useCallback(
     async (createInput: ICreateInput) => {
       try {
+        // TODO: Move this to context
         await insertToDos({
           variables: {
             title: createInput.inputValue,
