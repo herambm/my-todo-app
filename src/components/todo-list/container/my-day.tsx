@@ -18,6 +18,15 @@ const useStyles = makeStyles({
 
 export const MyDay: React.FunctionComponent = () => {
   const classes = useStyles();
+  // TODO: Setup timer to update at start of day
+  const [currentDate] = React.useState(
+    Intl.DateTimeFormat("en", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    }).format(new Date())
+  );
 
   const filter = React.useCallback(
     (todos: Todos[]) =>
@@ -29,12 +38,13 @@ export const MyDay: React.FunctionComponent = () => {
     (todos: Todos[]) => (
       <Box role="main" className={classes.body}>
         <Box className={classes.title}>My day</Box>
+        <Box>{currentDate}</Box>
         <ToDoCreator />
         <Divider />
         <ToDoListRenderer todos={todos} />
       </Box>
     ),
-    [classes]
+    [classes, currentDate]
   );
 
   return (

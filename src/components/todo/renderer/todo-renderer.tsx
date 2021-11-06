@@ -3,7 +3,7 @@ import { Box, makeStyles, Checkbox, IconButton } from "@material-ui/core";
 import classNames from "classnames";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { Todos } from "../../../generated/graphql";
 
 const useStyle = makeStyles({
@@ -37,6 +37,7 @@ const useStyle = makeStyles({
 export interface IActions {
   onCompleted: () => Promise<void>;
   onImportant: () => Promise<void>;
+  onDelete: () => Promise<void>;
 }
 
 export interface IToDoRendererProps {
@@ -69,8 +70,11 @@ export const ToDoRenderer: React.FunctionComponent<
             <StarBorderIcon className={classes.todoRightItem} />
           )}
         </IconButton>
-        <IconButton className={classes.todoRightItemIcon}>
-          <MoreVertIcon className={classes.todoRightItem} />
+        <IconButton
+          className={classes.todoRightItemIcon}
+          onClick={actions.onDelete}
+        >
+          <DeleteIcon className={classes.todoRightItem} />
         </IconButton>
       </Box>
     </Box>

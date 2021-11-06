@@ -1,8 +1,10 @@
 import * as React from "react";
+import { deleteTodo, IDeleteTodo } from "./actions/delete-to-do";
 import { IUpdateTodo, updateTodo } from "./actions/update-to-do";
 
 export interface IActionProvider {
   updateTodo: IUpdateTodo;
+  deleteTodo: IDeleteTodo;
 }
 
 const ActionProviderContext = React.createContext<IActionProvider>(
@@ -14,6 +16,7 @@ export const ActionProvider: React.FunctionComponent<
 > = ({ children }) => {
   const value = React.useRef<IActionProvider>({
     updateTodo,
+    deleteTodo,
   });
 
   return (

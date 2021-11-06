@@ -38,9 +38,16 @@ export const ToDo: React.FunctionComponent<
       .catch(() => console.log(`Task:${todo.id} update failed.`));
   }, [todo, client, actionProvider]);
 
+  const onDelete = React.useCallback(async () => {
+    actionProvider
+      .deleteTodo(client, todo.id)
+      .then(() => console.log(`Task:${todo.id} deleted.`))
+      .catch(() => console.log(`Task:${todo.id} delete failed.`));
+  }, [todo, client, actionProvider]);
+
   const actions = React.useMemo(
-    () => ({ onCompleted, onImportant }),
-    [onCompleted, onImportant]
+    () => ({ onCompleted, onImportant, onDelete }),
+    [onCompleted, onImportant, onDelete]
   );
 
   return <ToDoRenderer todo={todo} actions={actions} />;
