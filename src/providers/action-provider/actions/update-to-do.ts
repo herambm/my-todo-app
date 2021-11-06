@@ -1,6 +1,10 @@
 import { ApolloClient } from "@apollo/client";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
 import { UPDATE_TO_DO } from "../../../data/graphql/update-to-do";
+import {
+  GetToDosQuery,
+  GetToDosQueryVariables,
+} from "../../../generated/graphql";
 
 export type IUpdateTodo = (
   client: ApolloClient<object>,
@@ -38,12 +42,18 @@ export const updateTodo: IUpdateTodo = (
         },
       },
       update: (cache) => {
-        const existingTodos = cache.readQuery({ query: GET_TODOS }) as any; // TODO: Fix types
-        const newTodos = existingTodos.todos.map(
-          (
-            t: any // TODO: Fix types
-          ) => (t.id === id ? { ...t, ...patch } : t)
-        );
+        const existingTodos = cache.readQuery<
+          GetToDosQuery,
+          GetToDosQueryVariables
+        >({
+          query: GET_TODOS,
+        });
+
+        const newTodos =
+          existingTodos?.todos?.map((todo) =>
+            todo.id === id ? { ...todo, ...patch } : todo
+          ) ?? [];
+
         cache.writeQuery({
           query: GET_TODOS,
           data: { todos: newTodos },

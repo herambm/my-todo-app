@@ -1,11 +1,11 @@
 import * as React from "react";
 import { useApolloClient } from "@apollo/client";
-import { IToDo } from "../../../models/to-do.interface";
 import { ToDoRenderer } from "../renderer/todo-renderer";
 import { useActionProvider } from "../../../providers/action-provider";
+import { Todos } from "../../../generated/graphql";
 
 export interface IToDoProps {
-  todo: IToDo;
+  todo: Todos;
 }
 
 export const ToDo: React.FunctionComponent<

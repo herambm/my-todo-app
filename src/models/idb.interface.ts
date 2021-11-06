@@ -1,9 +1,9 @@
 import { DBSchema } from "idb";
-import { IToDoResponse } from "./to-do.interface";
+import { Todos } from "../generated/graphql";
 
 export interface IIDb extends DBSchema {
   todos: {
-    value: IToDoResponse;
+    value: Todos;
     key: number;
     indexes: {
       created_at: string;

@@ -1,10 +1,10 @@
-import { IToDo } from "../../models/to-do.interface";
+import { Todos } from "../../generated/graphql";
 
 export interface ITodoIDbStore {
-  addTodo(todo: IToDo): Promise<void>;
-  addTodos(todo: IToDo[]): Promise<void>;
-  putTodo(todo: IToDo): Promise<void>;
-  putTodos(todo: IToDo[]): Promise<void>;
-  getTodo(key: number): Promise<IToDo | undefined>;
-  getTodos(): Promise<IToDo[] | undefined>;
+  addTodo(todo: Todos): Promise<void>;
+  addTodos(todo: Todos[]): Promise<void>;
+  putTodo(todo: Todos): Promise<void>;
+  putTodos(todo: Todos[]): Promise<void>;
+  getTodo(key: number): Promise<Todos | undefined>;
+  getTodos(): Promise<Todos[] | undefined>;
 }

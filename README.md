@@ -1,6 +1,5 @@
 # My ToDo App
 
-[WIP app]
 This is a ToDo app which lets users create, update, delete, complete their todos.
 This app uses:
 
@@ -11,7 +10,15 @@ This app uses:
 
 ## Available Scripts
 
-In the project directory, you can run:
+To run this project locally run following commands
+
+### `npm install`
+
+To install project dependencies
+
+### `ADMIN_SECRET={value} npm generate`
+
+ADMIN_SECRET value can be obtained from Hasura app, This step will generate types from graphql schema, operations
 
 ### `npm start`
 

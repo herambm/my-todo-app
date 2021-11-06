@@ -1,10 +1,10 @@
 import * as React from "react";
 import { Box, makeStyles, Checkbox, IconButton } from "@material-ui/core";
-import { IToDo } from "../../../models/to-do.interface";
 import classNames from "classnames";
 import StarIcon from "@material-ui/icons/Star";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { Todos } from "../../../generated/graphql";
 
 const useStyle = makeStyles({
   toDo: {
@@ -40,7 +40,7 @@ export interface IActions {
 }
 
 export interface IToDoRendererProps {
-  todo: IToDo;
+  todo: Todos;
   actions: IActions;
   className?: string;
 }

@@ -1,8 +1,8 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
 import * as React from "react";
-import { IToDo } from "../../../models/to-do.interface";
 import { ToDo } from "../../todo/container/to-do";
 import classNames from "classnames/bind";
+import { Todos } from "../../../generated/graphql";
 
 const useStyles = makeStyles({
   list: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 export interface IToDoListProps {
-  todos: IToDo[];
+  todos: Todos[];
   className?: string;
 }
 

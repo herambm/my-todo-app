@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client";
 import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
-import { IToDoResponse } from "../../../models/to-do.interface";
+import { Todos } from "../../../generated/graphql";
 
 export interface ITodoListWrapperProps {
-  filter?: (todos: IToDoResponse[]) => IToDoResponse[];
-  componentWithTodos: (todos: IToDoResponse[]) => React.ReactElement;
+  filter?: (todos: Todos[]) => Todos[];
+  componentWithTodos: (todos: Todos[]) => React.ReactElement;
 }
 
 export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
@@ -17,8 +17,9 @@ export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
     const filteredTodos = React.useMemo(() => {
       const todos = [...(data?.todos ?? [])];
       todos.sort(
-        (a: IToDoResponse, b: IToDoResponse) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        (todo1: Todos, todo2: Todos) =>
+          new Date(todo2.created_at).getTime() -
+          new Date(todo1.created_at).getTime()
       );
       return filter ? filter(todos) : todos;
     }, [filter, data?.todos]);

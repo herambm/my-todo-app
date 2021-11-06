@@ -1,6 +1,6 @@
 import { IDBPDatabase, openDB } from "idb";
+import { Todos } from "../../generated/graphql";
 import { IIDb } from "../../models/idb.interface";
-import { IToDoResponse } from "../../models/to-do.interface";
 import { ITodoIDbStore } from "./todo-idb-store.interface";
 
 export class TodoIDbStore implements ITodoIDbStore {
@@ -14,21 +14,21 @@ export class TodoIDbStore implements ITodoIDbStore {
     });
   }
 
-  public addTodo = async (todo: IToDoResponse) => {
+  public addTodo = async (todo: Todos) => {
     await (await this.idbPromise).add("todos", todo);
   };
 
-  public addTodos = async (todos: IToDoResponse[]) => {
+  public addTodos = async (todos: Todos[]) => {
     const tx = (await this.idbPromise).transaction("todos", "readwrite");
 
     await Promise.all(todos.map((todo) => tx.store.add(todo)));
   };
 
-  public putTodo = async (todo: IToDoResponse) => {
+  public putTodo = async (todo: Todos) => {
     await (await this.idbPromise).put("todos", todo);
   };
 
-  public putTodos = async (todos: IToDoResponse[]) => {
+  public putTodos = async (todos: Todos[]) => {
     const tx = (await this.idbPromise).transaction("todos", "readwrite");
 
     await Promise.all(todos.map((todo) => tx.store.put(todo)));
@@ -38,7 +38,7 @@ export class TodoIDbStore implements ITodoIDbStore {
     return await (await this.idbPromise).get("todos", key);
   };
 
-  public getTodos = async (): Promise<IToDoResponse[]> => {
+  public getTodos = async (): Promise<Todos[]> => {
     return (
       (await (await this.idbPromise).getAllFromIndex("todos", "created_at")) ??
       []
