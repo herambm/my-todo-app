@@ -3,6 +3,7 @@ import { useApolloClient } from "@apollo/client";
 import { ToDoRenderer } from "../renderer/todo-renderer";
 import { useActionProvider } from "../../../providers/action-provider";
 import { Todos } from "../../../generated/graphql";
+import { useTodoDialogContext } from "../../../providers/todo-dialog-provider/todo-dialog-provider";
 
 export interface IToDoProps {
   todo: Todos;
@@ -13,6 +14,7 @@ export const ToDo: React.FunctionComponent<
 > = ({ todo }) => {
   const actionProvider = useActionProvider();
   const client = useApolloClient();
+  const { openDialog, closeDialog } = useTodoDialogContext();
 
   const onCompleted = React.useCallback(async () => {
     actionProvider
@@ -46,8 +48,8 @@ export const ToDo: React.FunctionComponent<
   }, [todo, client, actionProvider]);
 
   const actions = React.useMemo(
-    () => ({ onCompleted, onImportant, onDelete }),
-    [onCompleted, onImportant, onDelete]
+    () => ({ onCompleted, onImportant, onDelete, openDialog, closeDialog }),
+    [onCompleted, onImportant, onDelete, openDialog, closeDialog]
   );
 
   return <ToDoRenderer todo={todo} actions={actions} />;

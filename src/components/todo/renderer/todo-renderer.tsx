@@ -31,10 +31,16 @@ const useStyle = makeStyles({
     width: "100%",
     paddingRight: "2.5rem",
     paddingLeft: "0.5rem",
+    cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
 });
 
 export interface IActions {
+  openDialog: (todo: Todos) => void;
+  closeDialog: () => void;
   onCompleted: () => Promise<void>;
   onImportant: () => Promise<void>;
   onDelete: () => Promise<void>;
@@ -58,7 +64,13 @@ export const ToDoRenderer: React.FunctionComponent<
         color="primary"
         onChange={actions.onCompleted}
       />
-      <Box className={classes.content}>{todo.title}</Box>
+      <Box
+        role="button"
+        className={classes.content}
+        onClick={actions.openDialog.bind(undefined, todo)}
+      >
+        {todo.title}
+      </Box>
       <Box className={classes.toDoRightItems}>
         <IconButton
           className={classes.todoRightItemIcon}

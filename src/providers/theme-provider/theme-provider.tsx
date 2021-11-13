@@ -9,10 +9,11 @@ import {
 const commonTheme = createTheme({
   typography: {
     fontFamily: [
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
+      "Segoe UI",
+      "Segoe",
       "Arial",
+      "Roboto",
+      "Helvetica Neue",
       "sans-serif",
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',

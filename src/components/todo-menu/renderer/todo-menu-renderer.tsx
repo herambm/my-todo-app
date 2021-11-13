@@ -8,15 +8,18 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
+import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   todoMenuLayout: {
     margin: "unset",
     height: "100%",
+    background: grey[200],
   },
   todoMenuItem: {
     height: "3rem",
-    padding: "0.5rem",
+    paddingLeft: "1rem",
+    paddingRight: "1rem",
   },
   todoIcon: {
     marginRight: "1.5rem",
@@ -57,6 +60,7 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
             to={item.linkTo}
             style={linkStyle.current.style}
             key={item.id}
+            role="none"
           >
             <MenuItem
               button

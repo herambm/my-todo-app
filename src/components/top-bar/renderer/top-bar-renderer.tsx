@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+import { indigo } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/styles";
 import classNames from "classnames";
 import * as React from "react";
@@ -19,7 +19,8 @@ const useStyles = makeStyles({
     paddingLeft: "1.5rem",
     paddingRight: "1.5rem",
     height: "3.5rem",
-    borderBottom: `0.1rem solid ${grey[300]}`,
+    background: indigo[600],
+    color: "#FFFFFF",
   },
   leftItems: {
     display: "flex",

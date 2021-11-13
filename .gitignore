@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # generated
-/src/generated/*
+/src/generated
