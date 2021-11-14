@@ -1,8 +1,13 @@
-import { useQuery } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import { CircularProgress } from "@material-ui/core";
 import * as React from "react";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
-import { Todos } from "../../../generated/graphql";
+import {
+  GetToDosQuery,
+  GetToDosQueryVariables,
+  Todos,
+} from "../../../generated/graphql";
+import { useTodoIDbStore } from "../../../providers/todo-idb-store";
 
 export interface ITodoListWrapperProps {
   filter?: (todos: Todos[]) => Todos[];
@@ -11,8 +16,39 @@ export interface ITodoListWrapperProps {
 
 export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
   ({ filter, componentWithTodos }) => {
-    // TODO: Add IDb support
     const { data, loading, error } = useQuery(GET_TODOS);
+    const idbStore = useTodoIDbStore();
+    const client = useApolloClient();
+
+    React.useEffect(() => {
+      if ((loading || error) && !data) {
+        idbStore.getTodos().then((todos) => {
+          const existingTodos = client.cache.readQuery<
+            GetToDosQuery,
+            GetToDosQueryVariables
+          >({
+            query: GET_TODOS,
+          });
+
+          if (!existingTodos) {
+            client.cache.writeQuery({
+              query: GET_TODOS,
+              data: { todos },
+            });
+          }
+        });
+      }
+    });
+
+    React.useEffect(() => {
+      if (!loading && !error && data) {
+        data.todos &&
+          idbStore
+            .putTodos(data.todos)
+            .then(() => console.log("Todos written to idb"))
+            .catch((e) => console.log("Todos writing to idb failed", e));
+      }
+    });
 
     const filteredTodos = React.useMemo(() => {
       const todos = [...(data?.todos ?? [])];

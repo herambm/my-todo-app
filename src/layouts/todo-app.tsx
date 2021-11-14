@@ -6,7 +6,6 @@ import { TodoMenu } from "../components/todo-menu";
 import { TopBar } from "../components/top-bar";
 import { ActionProvider } from "../providers/action-provider";
 import { TodoIDbStoreProvider } from "../providers/todo-idb-store";
-import { ApolloGraphqlProvider } from "../providers/apollo-gql-provider";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -35,27 +34,25 @@ export const TodoApp = () => {
             <TodoMenu />
           </Box>
           <Divider orientation="vertical" flexItem />
-          <ApolloGraphqlProvider>
-            <TodoIDbStoreProvider>
-              <ActionProvider>
-                <TodoDialogProvider>
-                  <Box className={classes.content}>
-                    <Switch>
-                      <Route path="/my-day">
-                        <MyDay />
-                      </Route>
-                      <Route path="/important">
-                        <ImportantToDos />
-                      </Route>
-                      <Route path="/">
-                        <AllToDos />
-                      </Route>
-                    </Switch>
-                  </Box>
-                </TodoDialogProvider>
-              </ActionProvider>
-            </TodoIDbStoreProvider>
-          </ApolloGraphqlProvider>
+          <TodoIDbStoreProvider>
+            <ActionProvider>
+              <TodoDialogProvider>
+                <Box className={classes.content}>
+                  <Switch>
+                    <Route path="/my-day">
+                      <MyDay />
+                    </Route>
+                    <Route path="/important">
+                      <ImportantToDos />
+                    </Route>
+                    <Route path="/">
+                      <AllToDos />
+                    </Route>
+                  </Switch>
+                </Box>
+              </TodoDialogProvider>
+            </ActionProvider>
+          </TodoIDbStoreProvider>
         </Box>
       </Box>
     </Router>
