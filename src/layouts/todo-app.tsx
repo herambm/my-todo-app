@@ -1,5 +1,5 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { TodoDialogProvider } from "../providers/todo-dialog-provider/todo-dialog-provider";
 import { AllToDos, ImportantToDos, MyDay } from "../components/todo-list";
 import { TodoMenu } from "../components/todo-menu";
@@ -49,7 +49,6 @@ export const TodoApp = () => {
                     <Route path="/important" element={<ImportantToDos />} />
                     <Route path="/" element={<AllToDos />} />
                   </Routes>
-                  <Outlet />
                 </Box>
               </TodoDialogProvider>
             </ActionProvider>
