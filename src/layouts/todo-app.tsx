@@ -10,7 +10,12 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 const useStyles = makeStyles({
   layout: {
+    height: "100vh",
+    overflow: "hidden",
+  },
+  main: {
     display: "flex",
+    height: "100%",
   },
   menu: {
     flex: 1,
@@ -19,6 +24,7 @@ const useStyles = makeStyles({
     paddingLeft: "1rem",
     paddingRight: "1rem",
     flex: 5,
+    overflow: "scroll",
   },
 });
 
@@ -27,9 +33,9 @@ export const TodoApp = () => {
 
   return (
     <Router>
-      <Box>
+      <Box className={classes.layout}>
         <TopBar />
-        <Box className={classes.layout}>
+        <Box className={classes.main}>
           <Box className={classes.menu}>
             <TodoMenu />
           </Box>

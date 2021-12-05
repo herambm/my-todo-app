@@ -1,5 +1,5 @@
 import { useApolloClient, useQuery } from "@apollo/client";
-import { CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { GET_TODOS } from "../../../data/graphql/get-to-dos";
 import {
@@ -8,6 +8,14 @@ import {
   Todos,
 } from "../../../generated/graphql";
 import { useTodoIDbStore } from "../../../providers/todo-idb-store";
+import { enableIndexDBSupport } from "../../../utils/settings-utils";
+import { Spinner } from "../../spinner/spinner";
+
+const useStyles = makeStyles({
+  spinner: {
+    marginTop: "15rem",
+  },
+});
 
 export interface ITodoListWrapperProps {
   filter?: (todos: Todos[]) => Todos[];
@@ -16,12 +24,13 @@ export interface ITodoListWrapperProps {
 
 export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
   ({ filter, componentWithTodos }) => {
+    const classes = useStyles();
     const { data, loading, error } = useQuery(GET_TODOS);
     const idbStore = useTodoIDbStore();
     const client = useApolloClient();
 
     React.useEffect(() => {
-      if ((loading || error) && !data) {
+      if (enableIndexDBSupport && (loading || error) && !data) {
         idbStore.getTodos().then((todos) => {
           const existingTodos = client.cache.readQuery<
             GetToDosQuery,
@@ -41,7 +50,7 @@ export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
     });
 
     React.useEffect(() => {
-      if (!loading && !error && data) {
+      if (enableIndexDBSupport && !loading && !error && data) {
         data.todos &&
           idbStore
             .putTodos(data.todos)
@@ -61,7 +70,12 @@ export const TodoListWrapper: React.FunctionComponent<ITodoListWrapperProps> =
     }, [filter, data?.todos]);
 
     if (loading && filteredTodos.length === 0) {
-      return <CircularProgress />;
+      return (
+        <Spinner
+          message={"Loading your tasks in a moment..."}
+          className={classes.spinner}
+        />
+      );
     }
 
     if (error && !loading && filteredTodos.length === 0) {
