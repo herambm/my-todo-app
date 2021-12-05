@@ -1,12 +1,12 @@
 import { Box, Divider, makeStyles } from "@material-ui/core";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { TodoDialogProvider } from "../providers/todo-dialog-provider/todo-dialog-provider";
 import { AllToDos, ImportantToDos, MyDay } from "../components/todo-list";
 import { TodoMenu } from "../components/todo-menu";
 import { TopBar } from "../components/top-bar";
 import { ActionProvider } from "../providers/action-provider";
 import { TodoIDbStoreProvider } from "../providers/todo-idb-store";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 const useStyles = makeStyles({
   layout: {
@@ -32,7 +32,7 @@ export const TodoApp = () => {
   const classes = useStyles();
 
   return (
-    <Router>
+    <BrowserRouter>
       <Box className={classes.layout}>
         <TopBar />
         <Box className={classes.main}>
@@ -44,23 +44,18 @@ export const TodoApp = () => {
             <ActionProvider>
               <TodoDialogProvider>
                 <Box className={classes.content}>
-                  <Switch>
-                    <Route path="/my-day">
-                      <MyDay />
-                    </Route>
-                    <Route path="/important">
-                      <ImportantToDos />
-                    </Route>
-                    <Route path="/">
-                      <AllToDos />
-                    </Route>
-                  </Switch>
+                  <Routes>
+                    <Route path="/my-day" element={<MyDay />} />
+                    <Route path="/important" element={<ImportantToDos />} />
+                    <Route path="/" element={<AllToDos />} />
+                  </Routes>
+                  <Outlet />
                 </Box>
               </TodoDialogProvider>
             </ActionProvider>
           </TodoIDbStoreProvider>
         </Box>
       </Box>
-    </Router>
+    </BrowserRouter>
   );
 };
