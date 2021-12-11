@@ -6,7 +6,12 @@ import {
   MenuItem,
   MenuList,
 } from "@material-ui/core";
-import { NavLink } from "react-router-dom";
+import {
+  LinkProps,
+  NavLink,
+  useMatch,
+  useResolvedPath,
+} from "react-router-dom";
 import classNames from "classnames";
 import { grey } from "@material-ui/core/colors";
 
@@ -17,12 +22,10 @@ const useStyles = makeStyles({
     background: grey[200],
   },
   todoMenuItem: {
-    height: "3rem",
-    paddingLeft: "1rem",
-    paddingRight: "1rem",
+    padding: "unset",
   },
   todoIcon: {
-    marginRight: "1.5rem",
+    marginRight: "0.7rem",
     minWidth: "unset",
   },
 });
@@ -49,6 +52,8 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
     style: {
       color: "inherit",
       textDecoration: "inherit",
+      display: "flex",
+      padding: "1rem",
     },
   });
 
@@ -56,16 +61,15 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
     <Box className={classNames(classes.todoMenuLayout, className)}>
       <MenuList>
         {menuProps.map((item) => (
-          <NavLink
-            to={item.linkTo}
-            style={linkStyle.current.style}
+          <MenuItem
+            button
             key={item.id}
-            role="none"
+            className={classNames(classes.todoMenuItem, item.className)}
           >
-            <MenuItem
-              button
+            <CustomLink
+              to={item.linkTo}
+              style={linkStyle.current.style}
               key={item.id}
-              className={classNames(classes.todoMenuItem, item.className)}
             >
               {item.icon && (
                 <ListItemIcon className={classes.todoIcon}>
@@ -73,10 +77,25 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
                 </ListItemIcon>
               )}
               <Box>{item.text}</Box>
-            </MenuItem>
-          </NavLink>
+            </CustomLink>
+          </MenuItem>
         ))}
       </MenuList>
     </Box>
   );
 };
+
+function CustomLink({ children, to, ...props }: LinkProps) {
+  let resolved = useResolvedPath(to);
+  let match = useMatch({ path: resolved.pathname, end: true });
+
+  return (
+    <NavLink
+      to={to}
+      {...props}
+      style={{ ...props.style, ...(match && { fontWeight: "bold" }) }}
+    >
+      {children}
+    </NavLink>
+  );
+}
