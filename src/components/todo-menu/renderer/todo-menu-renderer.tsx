@@ -53,7 +53,7 @@ export const TodoMenuRenderer: React.FunctionComponent<ITodoMenuRenderer> = ({
       color: "inherit",
       textDecoration: "inherit",
       display: "flex",
-      padding: "1rem",
+      padding: "0.6rem 1rem",
     },
   });
 

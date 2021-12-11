@@ -50,6 +50,7 @@ const TodoDialogContext = React.createContext<ITodoDialogContext>(
 export const useTodoDialogContext = () =>
   React.useContext<ITodoDialogContext>(TodoDialogContext);
 
+// Todo: Move dialog component to components folder.
 export const TodoDialogProvider: React.FunctionComponent<
   React.PropsWithChildren<{}>
 > = ({ children }) => {
@@ -161,6 +162,9 @@ export const TodoDialogProvider: React.FunctionComponent<
               color="primary"
               className={classes.checkBox}
               onChange={onCompleted}
+              aria-label={`Mark task as ${
+                todo?.is_completed ? "incomplete" : "complete"
+              }.`}
             />
             <TextField
               autoFocus
@@ -170,7 +174,13 @@ export const TodoDialogProvider: React.FunctionComponent<
               fullWidth
               onChange={onInputChange}
             />
-            <IconButton className={classes.important} onClick={onImportant}>
+            <IconButton
+              className={classes.important}
+              onClick={onImportant}
+              aria-label={`Mark task as ${
+                todo?.is_important ? "unimportant" : "important"
+              }.`}
+            >
               {todo?.is_important ? <StarIcon /> : <StarBorderIcon />}
             </IconButton>
           </Box>
