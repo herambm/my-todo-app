@@ -19,6 +19,7 @@ const useStyles = makeStyles({
     paddingRight: "0.5rem",
     paddingLeft: "0.5rem",
     width: "100%",
+    minWidth: "10rem",
   },
 });
 

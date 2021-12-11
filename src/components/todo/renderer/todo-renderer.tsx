@@ -31,6 +31,7 @@ const useStyle = makeStyles({
     width: "100%",
     paddingRight: "2.5rem",
     paddingLeft: "0.5rem",
+    minWidth: "10rem",
     cursor: "pointer",
     "&:hover": {
       textDecoration: "underline",
@@ -68,6 +69,7 @@ export const ToDoRenderer: React.FunctionComponent<
         role="button"
         className={classes.content}
         onClick={actions.openDialog.bind(undefined, todo)}
+        tabIndex={0}
       >
         {todo.title}
       </Box>
@@ -75,6 +77,9 @@ export const ToDoRenderer: React.FunctionComponent<
         <IconButton
           className={classes.todoRightItemIcon}
           onClick={actions.onImportant}
+          aria-label={`Mark task as ${
+            todo.is_important ? "unimportant" : "important"
+          }.`}
         >
           {todo.is_important ? (
             <StarIcon className={classes.todoRightItem} />
@@ -85,6 +90,7 @@ export const ToDoRenderer: React.FunctionComponent<
         <IconButton
           className={classes.todoRightItemIcon}
           onClick={actions.onDelete}
+          aria-label="Delete task."
         >
           <DeleteIcon className={classes.todoRightItem} />
         </IconButton>
