@@ -186,10 +186,14 @@ export const TodoDialogProvider: React.FunctionComponent<
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeDialog} color="primary">
+          <Button onClick={closeDialog} color="primary" variant="outlined">
             Close
           </Button>
-          <Button onClick={onUpdateButtonClick} color="primary">
+          <Button
+            onClick={onUpdateButtonClick}
+            color="primary"
+            variant="outlined"
+          >
             Update
           </Button>
         </DialogActions>

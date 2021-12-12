@@ -21,6 +21,9 @@ const useStyles = makeStyles({
     width: "100%",
     minWidth: "10rem",
   },
+  addButton: {
+    marginLeft: "0.5rem",
+  },
 });
 
 export interface ICreateInput {
@@ -83,7 +86,12 @@ export const ToDoCreateRenderer: React.FunctionComponent<ITodoCreate> = ({
       {state === CreationState.Loading ? (
         <CircularProgress size="1.5rem" />
       ) : (
-        <Button onClick={onAddClick} color="primary">
+        <Button
+          onClick={onAddClick}
+          color="primary"
+          variant="outlined"
+          className={classes.addButton}
+        >
           {actionLabel}
         </Button>
       )}

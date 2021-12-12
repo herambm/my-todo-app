@@ -13,13 +13,11 @@ import {
   useResolvedPath,
 } from "react-router-dom";
 import classNames from "classnames";
-import { grey } from "@material-ui/core/colors";
 
 const useStyles = makeStyles({
   todoMenuLayout: {
     margin: "unset",
     height: "100%",
-    background: grey[200],
   },
   todoMenuItem: {
     padding: "unset",

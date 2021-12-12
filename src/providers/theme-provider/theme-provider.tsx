@@ -25,6 +25,25 @@ const lightTheme = createTheme({
   ...commonTheme,
   palette: {
     type: "light",
+    divider: "#E0E0E0",
+    primary: {
+      main: "#5048E5",
+    },
+    secondary: {
+      main: "#10B981",
+    },
+    success: {
+      main: "#14B8A6",
+    },
+    info: {
+      main: "#2196F3",
+    },
+    warning: {
+      main: "#FFB020",
+    },
+    error: {
+      main: "#D14343",
+    },
   },
 });
 
@@ -32,6 +51,12 @@ const darkTheme = createTheme({
   ...commonTheme,
   palette: {
     type: "dark",
+    primary: {
+      main: "#fafafa",
+    },
+    secondary: {
+      main: "#26a27b",
+    },
   },
 });
 
