@@ -32,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "install": "npm install",
+    "install": "npm run generate && npm install",
     "generate": "graphql-codegen --config codegen.js"
   },
   "eslintConfig": {
