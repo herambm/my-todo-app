@@ -1,6 +1,6 @@
 # My ToDo App
 
-This is a ToDo app which lets users create, update, delete, complete their todos.
+This is an end to end ToDo app which lets users create, update, delete, complete their todos.
 
 ![image](https://user-images.githubusercontent.com/26832886/147627203-33848128-e542-43fc-b1c5-3d354d279e38.png)
 
