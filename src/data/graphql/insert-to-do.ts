@@ -16,7 +16,6 @@ export const INSERT_TO_DOS = gql`
       }
     ) {
       returning {
-        user_id
         title
         last_modified_at
         is_important

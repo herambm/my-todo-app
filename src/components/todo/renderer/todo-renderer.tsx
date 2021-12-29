@@ -64,9 +64,6 @@ export const ToDoRenderer: React.FunctionComponent<
         checked={!!todo.is_completed}
         color="primary"
         onChange={actions.onCompleted}
-        aria-label={`Mark task as ${
-          todo.is_completed ? "incomplete" : "complete"
-        }.`}
       />
       <Box
         role="button"

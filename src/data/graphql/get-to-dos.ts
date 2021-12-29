@@ -5,7 +5,6 @@ export const GET_TODOS = gql`
     todos {
       id
       title
-      user_id
       is_completed
       is_important
       last_modified_at
