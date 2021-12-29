@@ -95,7 +95,7 @@ export const TodoDialogProvider: React.FunctionComponent<
       if (todo) {
         return actionProvider
           .updateTodo(client, todo.id, {
-            title: todo.title,
+            title: todo.title ?? "",
             is_important: !!todo.is_important,
             is_completed: !!todo.is_completed,
             due_by: todo.due_by,
@@ -133,7 +133,7 @@ export const TodoDialogProvider: React.FunctionComponent<
   }, [onUpdate, todo]);
 
   const onUpdateButtonClick = React.useCallback(() => {
-    onUpdate({ title: todo?.title });
+    onUpdate({ title: todo?.title ?? "" });
     setOpen(false);
   }, [onUpdate, todo]);
 

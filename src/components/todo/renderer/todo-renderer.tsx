@@ -71,7 +71,7 @@ export const ToDoRenderer: React.FunctionComponent<
         onClick={actions.openDialog.bind(undefined, todo)}
         tabIndex={0}
       >
-        {todo.title}
+        {todo.title ?? ""}
       </Box>
       <Box className={classes.toDoRightItems}>
         <IconButton

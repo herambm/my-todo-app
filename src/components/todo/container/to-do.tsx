@@ -19,7 +19,7 @@ export const ToDo: React.FunctionComponent<
   const onCompleted = React.useCallback(async () => {
     actionProvider
       .updateTodo(client, todo.id, {
-        title: todo.title,
+        title: todo.title ?? "",
         is_important: !!todo.is_important,
         is_completed: !todo.is_completed,
         due_by: todo.due_by,
@@ -31,7 +31,7 @@ export const ToDo: React.FunctionComponent<
   const onImportant = React.useCallback(async () => {
     actionProvider
       .updateTodo(client, todo.id, {
-        title: todo.title,
+        title: todo.title ?? "",
         is_important: !todo.is_important,
         is_completed: !!todo.is_completed,
         due_by: todo.due_by,
