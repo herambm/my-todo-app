@@ -6,6 +6,8 @@ This is an end to end ToDo app which lets users create, update, delete, complete
 
 ![image](https://user-images.githubusercontent.com/26832886/147627210-817a3d3e-5107-4df4-aa35-649978fdaf07.png)
 
+Demo: https://my-todo-manager-app.netlify.app/
+
 This app uses:
 
 - Auth: Auth0
