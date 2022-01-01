@@ -14,14 +14,12 @@ const useStyles = makeStyles({
 });
 
 export const LogoutButton: React.FunctionComponent = () => {
-  const { logout, user } = useAuth0();
+  const { logout } = useAuth0();
   const classes = useStyles();
   const onLogOut = React.useCallback(
     () => logout({ returnTo: window.location.origin }),
     [logout]
   );
 
-  return user ? (
-    <ExitToApp onClick={onLogOut} className={classes.logOut} />
-  ) : null;
+  return <ExitToApp onClick={onLogOut} className={classes.logOut} />;
 };

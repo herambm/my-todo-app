@@ -1,5 +1,4 @@
 import { Auth0Provider } from "@auth0/auth0-react";
-import { AuthProvider } from "./providers/auth-provider/auth-provider";
 import { TodoApp } from "./layouts/todo-app";
 import { UiThemeProvider } from "./providers/theme-provider";
 import { ApolloGraphqlProvider } from "./providers/apollo-gql-provider";
@@ -20,9 +19,7 @@ export default function App() {
     >
       <ApolloGraphqlProvider>
         <UiThemeProvider>
-          <AuthProvider>
-            <TodoApp />
-          </AuthProvider>
+          <TodoApp />
         </UiThemeProvider>
       </ApolloGraphqlProvider>
     </Auth0Provider>

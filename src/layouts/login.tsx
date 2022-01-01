@@ -2,7 +2,6 @@ import * as React from "react";
 import { Box, makeStyles } from "@material-ui/core";
 import logo from "../statics/Images/todo.png";
 import { Login } from "../components/top-bar/container/log-in-button";
-import { TopBar } from "../components/top-bar";
 
 const useStyles = makeStyles({
   layout: {
@@ -13,7 +12,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "7rem",
+    height: "90%",
+    justifyContent: "center",
   },
   image: {
     width: "35rem",
@@ -26,7 +26,6 @@ export const LoginPage: React.FunctionComponent = () => {
 
   return (
     <Box className={classes.layout}>
-      <TopBar />
       <Box className={classes.main}>
         {/* {
           <a href="https://www.freepik.com/vectors/calendar">

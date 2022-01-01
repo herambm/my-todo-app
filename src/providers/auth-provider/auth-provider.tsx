@@ -1,20 +1,30 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import * as React from "react";
+import { Spinner } from "../../components/spinner/spinner";
 import { LoginPage } from "../../layouts/login";
+
+const useStyles = makeStyles({
+  spinner: {
+    height: "90%",
+  },
+});
 
 export const AuthProvider: React.FunctionComponent<
   React.PropsWithChildren<{}>
 > = ({ children }) => {
-  const { isAuthenticated, isLoading, error } = useAuth0();
+  const classes = useStyles();
+  const { isAuthenticated, isLoading } = useAuth0();
   if (isAuthenticated) {
     return <>{children}</>;
   }
   if (isLoading) {
-    return <CircularProgress />;
-  }
-  if (error && !isLoading) {
-    return <LoginPage />;
+    return (
+      <Spinner
+        message={"Loading your app in a moment..."}
+        className={classes.spinner}
+      />
+    );
   }
 
   return <LoginPage />;

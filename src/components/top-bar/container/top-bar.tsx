@@ -1,3 +1,4 @@
+import { useAuth0, User } from "@auth0/auth0-react";
 import { makeStyles } from "@material-ui/core";
 import * as React from "react";
 import { TopBarRenderer } from "../renderer/top-bar-renderer";
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
 
 export const TopBar: React.FunctionComponent = () => {
   const classes = useStyles();
+  const { user } = useAuth0();
 
   const leftItems = React.useMemo(
     () => [
@@ -22,13 +24,14 @@ export const TopBar: React.FunctionComponent = () => {
     ],
     [classes.header]
   );
-  const rightItems = React.useMemo(
-    () => [
-      <ThemeSelector key="top-bar-theme-selector" />,
-      <LogoutButton key="top-bar-log-out" />,
-    ],
-    []
-  );
+  const rightItems = React.useMemo(() => getRightItems(user), [user]);
 
   return <TopBarRenderer rightItems={rightItems} leftItems={leftItems} />;
+};
+
+const getRightItems = (user?: User) => {
+  const rightItems = [];
+  rightItems.push(<ThemeSelector key="top-bar-theme-selector" />);
+  user && rightItems.push(<LogoutButton key="top-bar-log-out" />);
+  return rightItems;
 };

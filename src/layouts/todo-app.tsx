@@ -7,6 +7,7 @@ import { TopBar } from "../components/top-bar";
 import { ActionProvider } from "../providers/action-provider";
 import { TodoIDbStoreProvider } from "../providers/todo-idb-store";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "../providers/auth-provider";
 
 const useStyles = makeStyles({
   layout: {
@@ -35,25 +36,27 @@ export const TodoApp = () => {
     <BrowserRouter>
       <Box className={classes.layout}>
         <TopBar />
-        <Box className={classes.main}>
-          <Box className={classes.menu}>
-            <TodoMenu />
+        <AuthProvider>
+          <Box className={classes.main}>
+            <Box className={classes.menu}>
+              <TodoMenu />
+            </Box>
+            <Divider orientation="vertical" flexItem />
+            <TodoIDbStoreProvider>
+              <ActionProvider>
+                <TodoDialogProvider>
+                  <Box className={classes.content}>
+                    <Routes>
+                      <Route path="/my-day" element={<MyDay />} />
+                      <Route path="/important" element={<ImportantToDos />} />
+                      <Route path="/" element={<AllToDos />} />
+                    </Routes>
+                  </Box>
+                </TodoDialogProvider>
+              </ActionProvider>
+            </TodoIDbStoreProvider>
           </Box>
-          <Divider orientation="vertical" flexItem />
-          <TodoIDbStoreProvider>
-            <ActionProvider>
-              <TodoDialogProvider>
-                <Box className={classes.content}>
-                  <Routes>
-                    <Route path="/my-day" element={<MyDay />} />
-                    <Route path="/important" element={<ImportantToDos />} />
-                    <Route path="/" element={<AllToDos />} />
-                  </Routes>
-                </Box>
-              </TodoDialogProvider>
-            </ActionProvider>
-          </TodoIDbStoreProvider>
-        </Box>
+        </AuthProvider>
       </Box>
     </BrowserRouter>
   );

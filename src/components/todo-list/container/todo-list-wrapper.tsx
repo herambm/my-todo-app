@@ -13,7 +13,7 @@ import { Spinner } from "../../spinner/spinner";
 
 const useStyles = makeStyles({
   spinner: {
-    marginTop: "15rem",
+    height: "90%",
   },
 });
 
